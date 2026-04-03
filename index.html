@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PRIMUS Engraving Order Form</title>
+<style>
+body {font-family: Arial; background:#0f172a; color:#fff; padding:20px;}
+.container {max-width:500px; margin:auto; background:#1e293b; padding:20px; border-radius:12px;}
+input, textarea, select {width:100%; padding:12px; margin:8px 0; border-radius:8px; border:none;}
+button {width:100%; padding:12px; margin-top:10px; border:none; border-radius:8px; font-weight:bold;}
+.copy {background:#facc15;}
+.messenger {background:#3b82f6; color:#fff;}
+.sms {background:#22c55e;}
+</style>
+</head>
+<body>
+<div class="container">
+<h2>PRIMUS Order Form</h2>
+<input id="name" placeholder="Name">
+<input id="contact" placeholder="Contact Number">
+<input id="product" placeholder="Product">
+<input id="qty" placeholder="Quantity">
+<textarea id="text" placeholder="Text to Engrave"></textarea>
+<select id="logo">
+<option value="">With Logo?</option>
+<option>Yes</option>
+<option>No</option>
+</select>
+<input id="date" placeholder="Pick-up Date">
+
+<button class="copy" onclick="copyOrder()">Copy</button>
+<button class="messenger" onclick="openMessenger()">Messenger</button>
+<button class="sms" onclick="sendSMS()">SMS</button>
+</div>
+
+<script>
+const phone="639612468852";
+const messenger="https://m.me/primusengraving";
+
+function build(){
+return `PRIMUS ORDER
+
+Name:${name.value}
+Contact:${contact.value}
+Product:${product.value}
+Qty:${qty.value}
+Text:${text.value}
+Logo:${logo.value}
+Date:${date.value}`;
+}
+
+function copyOrder(){
+navigator.clipboard.writeText(build());
+alert("Copied. Paste in Messenger.");
+}
+
+function openMessenger(){
+copyOrder();
+window.open(messenger);
+}
+
+function sendSMS(){
+location.href=`sms:${phone}?body=${encodeURIComponent(build())}`;
+}
+</script>
+</body>
+</html>
